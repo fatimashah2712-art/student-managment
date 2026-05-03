@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grades — PMAS-AAUR Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <span>📍 Rawalpindi, Pakistan &nbsp;|&nbsp; University Institute of Information Technology</span>
+  <div><a href="#">Help Desk</a><a href="#">Contact</a><a href="#">AAUR Website</a></div>
+</div>
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text"><h1>PMAS Arid Agriculture University</h1><p>Student Management Portal — UIIT</p></div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="students.html">👨‍🎓 Students</a>
+    <a href="teachers.html">👨‍🏫 Teachers</a>
+    <a href="manage-courses.html">📚 Courses</a>
+    <a href="attendance.html">📋 Attendance</a>
+    <a href="grades.html" class="active">📊 Grades</a>
+    <a href="notices.html">📢 Notices</a>
+  </nav>
+  <div class="user-badge"><div class="user-avatar">A</div><span class="user-name">Admin</span></div>
+</header>
+
+<div style="background:var(--primary);padding:28px 40px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h2 style="color:white;font-size:22px;font-weight:700;font-family:'Outfit',sans-serif;">📊 Grades & Results</h2>
+    <p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:4px;">Manage student grades and academic results</p>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <div class="breadcrumb">
+    <a href="index.html">🏠 Home</a><span class="sep">›</span><span class="current">Grades</span>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon blue">📊</div><div class="stat-info"><h3 id="total-g">...</h3><p>Total Records</p></div></div>
+    <div class="stat-card"><div class="stat-icon green">🏆</div><div class="stat-info"><h3 id="pass-g">...</h3><p>Passed</p></div></div>
+    <div class="stat-card"><div class="stat-icon red">❌</div><div class="stat-info"><h3 id="fail-g">...</h3><p>Failed</p></div></div>
+    <div class="stat-card"><div class="stat-icon orange">⭐</div><div class="stat-info"><h3 id="avg-g">...</h3><p>Avg Score</p></div></div>
+  </div>
+
+  <!-- GRADING INFO -->
+  <div class="card" style="padding:18px 26px;">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+      <strong style="font-size:13px;color:var(--text-muted);">Grade Scale:</strong>
+      <span class="badge badge-green">A+ ≥85</span>
+      <span class="badge badge-green">A ≥80</span>
+      <span class="badge badge-blue">B+ ≥75</span>
+      <span class="badge badge-blue">B ≥70</span>
+      <span class="badge badge-orange">C+ ≥65</span>
+      <span class="badge badge-orange">C ≥60</span>
+      <span class="badge badge-orange">D ≥50</span>
+      <span class="badge badge-red">F &lt;50</span>
+      <span style="font-size:12px;color:var(--text-muted);margin-left:8px;">Formula: Mid×30% + Final×50% + Assignments×20%</span>
+    </div>
+  </div>
+
+  <!-- ADD GRADES FORM -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>➕</span> <span id="formTitle">Enter Grades</span></div>
+      <button class="btn btn-outline btn-sm" onclick="resetForm()">✕ Clear</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Student *</label>
+        <select id="student_id"><option value="">— Select Student —</option></select>
+      </div>
+      <div class="form-group">
+        <label>Course *</label>
+        <select id="course_id"><option value="">— Select Course —</option></select>
+      </div>
+      <div class="form-group">
+        <label>Mid Term Marks (out of 100)</label>
+        <input type="number" id="mid_term" placeholder="e.g. 75" min="0" max="100" oninput="calcTotal()">
+      </div>
+      <div class="form-group">
+        <label>Final Term Marks (out of 100)</label>
+        <input type="number" id="final_term" placeholder="e.g. 80" min="0" max="100" oninput="calcTotal()">
+      </div>
+      <div class="form-group">
+        <label>Assignments Marks (out of 100)</label>
+        <input type="number" id="assignments" placeholder="e.g. 90" min="0" max="100" oninput="calcTotal()">
+      </div>
+      <div class="form-group">
+        <label>Calculated Total & Grade</label>
+        <div style="display:flex;gap:10px;align-items:center;padding:10px 14px;background:#f8fafc;border:1.5px solid var(--border);border-radius:8px;">
+          <span id="calc-total" style="font-size:22px;font-weight:800;color:var(--primary);font-family:'Outfit',sans-serif;">—</span>
+          <span id="calc-grade" class="badge badge-blue" style="font-size:16px;padding:4px 14px;">—</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);display:flex;gap:10px;">
+      <button class="btn btn-primary" onclick="submitGrades()">💾 Save Grades</button>
+      <button class="btn btn-outline" onclick="resetForm()">✕ Cancel</button>
+    </div>
+    <div id="msg"></div>
+  </div>
+
+  <!-- GRADES TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>📋</span> All Grade Records</div>
+      <div style="display:flex;gap:10px;">
+        <select id="filterGrade" onchange="filterGrades()" style="width:auto;padding:7px 12px;font-size:13px;">
+          <option value="">All Grades</option>
+          <option value="A+">A+</option><option value="A">A</option>
+          <option value="B+">B+</option><option value="B">B</option>
+          <option value="C+">C+</option><option value="C">C</option>
+          <option value="D">D</option><option value="F">F</option>
+        </select>
+        <div class="search-wrap"><span>🔍</span><input type="text" id="search" placeholder="Search student..." oninput="filterGrades()"></div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Student</th><th>Course</th><th>Mid Term</th><th>Final Term</th><th>Assignments</th><th>Total</th><th>Grade</th><th>Actions</th></tr></thead>
+        <tbody id="tbody"><tr><td colspan="9" style="text-align:center;padding:40px;color:#999">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><h3>🎓 PMAS Arid Agriculture University</h3><p>University Institute of Information Technology (UIIT), Rawalpindi.</p></div>
+    <div class="footer-col"><h4>Portal</h4><a href="index.html">Home</a><a href="students.html">Students</a><a href="teachers.html">Teachers</a><a href="manage-courses.html">Courses</a><a href="attendance.html">Attendance</a><a href="grades.html">Grades</a></div>
+    <div class="footer-col"><h4>University</h4><a href="#">AAUR Website</a><a href="#">Academic Calendar</a><a href="#">Fee Structure</a><a href="#">Contact UIIT</a></div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 PMAS Arid Agriculture University Rawalpindi. All rights reserved.</div>
+    <div>Developed by <span>CSC-251 Web Technologies</span> — Spring 2026</div>
+  </div>
+</footer>
+
+<script>
+  let allGrades=[], editId=null;
+
+  function loadDropdowns(){
+    fetch('/api/students').then(r=>r.json()).then(s=>{document.getElementById('student_id').innerHTML='<option value="">— Select Student —</option>'+s.map(x=>`<option value="${x.id}">${x.name} (${x.roll_no})</option>`).join('');});
+    fetch('/api/courses').then(r=>r.json()).then(c=>{document.getElementById('course_id').innerHTML='<option value="">— Select Course —</option>'+c.map(x=>`<option value="${x.id}">${x.course_code} — ${x.course_name}</option>`).join('');});
+  }
+
+  function calcTotal(){
+    const mid=parseFloat(document.getElementById('mid_term').value)||0;
+    const fin=parseFloat(document.getElementById('final_term').value)||0;
+    const asg=parseFloat(document.getElementById('assignments').value)||0;
+    const total=(mid*0.3)+(fin*0.5)+(asg*0.2);
+    let grade='F';
+    if(total>=85)grade='A+'; else if(total>=80)grade='A'; else if(total>=75)grade='B+';
+    else if(total>=70)grade='B'; else if(total>=65)grade='C+'; else if(total>=60)grade='C'; else if(total>=50)grade='D';
+    document.getElementById('calc-total').textContent=total.toFixed(1);
+    const gb=document.getElementById('calc-grade');
+    gb.textContent=grade;
+    gb.className='badge '+(grade==='F'?'badge-red':grade.startsWith('A')?'badge-green':grade.startsWith('B')?'badge-blue':'badge-orange');
+  }
+
+  function loadGrades(){
+    fetch('/api/grades').then(r=>r.json()).then(data=>{
+      allGrades=data;
+      document.getElementById('total-g').textContent=data.length;
+      document.getElementById('pass-g').textContent=data.filter(g=>g.grade!=='F').length;
+      document.getElementById('fail-g').textContent=data.filter(g=>g.grade==='F').length;
+      const avg=data.length?data.reduce((s,g)=>s+parseFloat(g.total||0),0)/data.length:0;
+      document.getElementById('avg-g').textContent=avg.toFixed(1);
+      renderTable(data);
+    });
+  }
+
+  function renderTable(data){
+    const tbody=document.getElementById('tbody');
+    if(!data.length){tbody.innerHTML=`<tr><td colspan="9"><div class="empty-state"><div class="icon">📊</div><h3>No grade records</h3><p>Enter grades using the form above.</p></div></td></tr>`;return;}
+    tbody.innerHTML=data.map((g,i)=>{
+      const gc=g.grade==='F'?'badge-red':g.grade&&g.grade.startsWith('A')?'badge-green':g.grade&&g.grade.startsWith('B')?'badge-blue':'badge-orange';
+      return `<tr>
+        <td style="color:var(--text-muted);font-size:13px">${i+1}</td>
+        <td><div style="display:flex;align-items:center;gap:10px;"><div class="s-avatar">${g.student_name.charAt(0)}</div><div><div class="student-name">${g.student_name}</div><div class="student-roll">${g.roll_no}</div></div></div></td>
+        <td><span class="badge badge-blue">${g.course_code}</span></td>
+        <td style="text-align:center">${g.mid_term}</td>
+        <td style="text-align:center">${g.final_term}</td>
+        <td style="text-align:center">${g.assignments}</td>
+        <td style="text-align:center;font-weight:700;color:var(--primary)">${parseFloat(g.total).toFixed(1)}</td>
+        <td><span class="badge ${gc}" style="font-size:14px;padding:4px 12px;">${g.grade}</span></td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteGrade(${g.id})">🗑️</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  function filterGrades(){
+    const q=document.getElementById('search').value.toLowerCase();
+    const gr=document.getElementById('filterGrade').value;
+    renderTable(allGrades.filter(g=>(!q||g.student_name.toLowerCase().includes(q))&&(!gr||g.grade===gr)));
+  }
+
+  function submitGrades(){
+    const msg=document.getElementById('msg');
+    const data={student_id:document.getElementById('student_id').value,course_id:document.getElementById('course_id').value,mid_term:document.getElementById('mid_term').value,final_term:document.getElementById('final_term').value,assignments:document.getElementById('assignments').value};
+    if(!data.student_id||!data.course_id){msg.innerHTML='<div class="alert alert-error">⚠️ Student and course are required.</div>';return;}
+    const url=editId?`/api/grades/${editId}`:'/api/grades',method=editId?'PUT':'POST';
+    fetch(url,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json()).then(res=>{msg.innerHTML=`<div class="alert alert-success">✅ ${res.message} — Total: ${res.total}, Grade: ${res.grade}</div>`;resetForm();loadGrades();});
+  }
+
+  function deleteGrade(id){if(!confirm('Delete this grade record?'))return;fetch(`/api/grades/${id}`,{method:'DELETE'}).then(()=>loadGrades());}
+
+  function resetForm(){editId=null;['student_id','course_id','mid_term','final_term','assignments'].forEach(id=>document.getElementById(id).value='');document.getElementById('calc-total').textContent='—';document.getElementById('calc-grade').textContent='—';document.getElementById('calc-grade').className='badge badge-blue';document.getElementById('formTitle').textContent='Enter Grades';document.getElementById('msg').innerHTML='';}
+
+  loadDropdowns();
+  loadGrades();
+</script>
+</body>
+</html>

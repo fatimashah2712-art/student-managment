@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students — PMAS-AAUR Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Rawalpindi, Pakistan &nbsp;|&nbsp; University Institute of Information Technology</span>
+  <div>
+    <a href="#">Help Desk</a>
+    <a href="#">Contact</a>
+    <a href="#">AAUR Website</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text">
+      <h1>PMAS Arid Agriculture University</h1>
+      <p>Student Management Portal — UIIT</p>
+    </div>
+  </a>
+  <nav class="main-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="students.html">👨‍🎓 Students</a>
+  <a href="teachers.html">👨‍🏫 Teachers</a>
+  <a href="manage-courses.html">📚 Courses</a>
+  <a href="attendance.html">📋 Attendance</a>
+  <a href="grades.html">📊 Grades</a>
+  <a href="notices.html">📢 Notices</a>
+</nav>
+  <div class="user-badge">
+    <div class="user-avatar">A</div>
+    <span class="user-name">Admin</span>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div style="background: var(--primary); padding: 28px 40px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <h2 style="color:white; font-size:22px; font-weight:700; font-family:'Outfit',sans-serif;">👨‍🎓 Student Records</h2>
+    <p style="color:rgba(255,255,255,0.6); font-size:13px; margin-top:4px;">Manage and view all registered students</p>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="index.html">🏠 Home</a>
+    <span class="sep">›</span>
+    <span class="current">Students</span>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="stat-card">
+      <div class="stat-icon blue">👥</div>
+      <div class="stat-info"><h3 id="total-count">...</h3><p>Total Students</p></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">🖥️</div>
+      <div class="stat-info"><h3 id="cs-count">...</h3><p>CS Students</p></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon orange">⚙️</div>
+      <div class="stat-info"><h3 id="se-count">...</h3><p>SE Students</p></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red">📋</div>
+      <div class="stat-info"><h3 id="other-count">...</h3><p>Other</p></div>
+    </div>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>📋</span> All Students</div>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+        <div class="search-wrap">
+          <span>🔍</span>
+          <input type="text" id="search" placeholder="Search students..." oninput="filterStudents()">
+        </div>
+        <select id="filterSem" onchange="filterStudents()" style="width:auto; padding:7px 12px; font-size:13px;">
+          <option value="">All Semesters</option>
+          <option value="1">Semester 1</option>
+          <option value="2">Semester 2</option>
+          <option value="3">Semester 3</option>
+          <option value="4">Semester 4</option>
+          <option value="5">Semester 5</option>
+          <option value="6">Semester 6</option>
+          <option value="7">Semester 7</option>
+          <option value="8">Semester 8</option>
+        </select>
+        <a href="add.html" class="btn btn-primary">➕ Add New Student</a>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Roll Number</th>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="7" style="text-align:center; padding:40px; color:#999;">Loading students...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>🎓 PMAS Arid Agriculture University</h3>
+      <p>University Institute of Information Technology (UIIT), Rawalpindi. Empowering students through technology and innovation since 1994.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Portal</h4>
+      <a href="index.html">Home</a>
+      <a href="students.html">Students</a>
+      <a href="add.html">Add Student</a>
+      <a href="courses.html">Courses</a>
+      <a href="notices.html">Notices</a>
+    </div>
+    <div class="footer-col">
+      <h4>University</h4>
+      <a href="#">AAUR Website</a>
+      <a href="#">Academic Calendar</a>
+      <a href="#">Fee Structure</a>
+      <a href="#">Contact UIIT</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 PMAS Arid Agriculture University Rawalpindi. All rights reserved.</div>
+    <div>Developed by <span>CSC-251 Web Technologies</span> — Spring 2026</div>
+  </div>
+</footer>
+
+<script>
+  let allStudents = [];
+
+  function loadStudents() {
+    fetch('/api/students')
+      .then(r => r.json())
+      .then(students => {
+        allStudents = students;
+        updateStats(students);
+        renderTable(students);
+      })
+      .catch(() => {
+        document.getElementById('tbody').innerHTML =
+          '<tr><td colspan="7" style="text-align:center;color:red;padding:30px;">Error loading. Is the server running?</td></tr>';
+      });
+  }
+
+  function updateStats(students) {
+    document.getElementById('total-count').textContent = students.length;
+    document.getElementById('cs-count').textContent = students.filter(s => s.department && s.department.toLowerCase().includes('computer')).length;
+    document.getElementById('se-count').textContent = students.filter(s => s.department && s.department.toLowerCase().includes('software')).length;
+    document.getElementById('other-count').textContent = students.filter(s => !s.department || (!s.department.toLowerCase().includes('computer') && !s.department.toLowerCase().includes('software'))).length;
+  }
+
+  function renderTable(students) {
+    const tbody = document.getElementById('tbody');
+    if (students.length === 0) {
+      tbody.innerHTML = `
+        <tr><td colspan="7">
+          <div class="empty-state">
+            <div class="icon">👨‍🎓</div>
+            <h3>No students found</h3>
+            <p>Try adjusting your search or add a new student.</p>
+            <a href="add.html" class="btn btn-primary">➕ Add Student</a>
+          </div>
+        </td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = students.map((s, i) => `
+      <tr>
+        <td style="color:var(--text-muted); font-size:13px;">${i + 1}</td>
+        <td>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="s-avatar">${s.name.charAt(0).toUpperCase()}</div>
+            <div>
+              <div class="student-name">${s.name}</div>
+              <div class="student-roll">${s.email || 'No email provided'}</div>
+            </div>
+          </div>
+        </td>
+        <td><span class="badge badge-blue">${s.roll_no}</span></td>
+        <td>${s.department || '<span style="color:#bbb">—</span>'}</td>
+        <td>${s.semester ? `<span class="badge badge-green">Semester ${s.semester}</span>` : '<span style="color:#bbb">—</span>'}</td>
+        <td style="font-size:13px; color:var(--text-muted);">${s.email || '—'}</td>
+        <td>
+          <div style="display:flex; gap:6px;">
+            <a href="add.html?id=${s.id}" class="btn btn-outline btn-sm">✏️ Edit</a>
+            <button class="btn btn-danger btn-sm" onclick="deleteStudent(${s.id}, '${s.name.replace(/'/g,"\\'")}')">🗑️</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterStudents() {
+    const q   = document.getElementById('search').value.toLowerCase();
+    const sem = document.getElementById('filterSem').value;
+    const filtered = allStudents.filter(s => {
+      const matchQ   = !q || s.name.toLowerCase().includes(q) || s.roll_no.toLowerCase().includes(q) || (s.email && s.email.toLowerCase().includes(q));
+      const matchSem = !sem || String(s.semester) === sem;
+      return matchQ && matchSem;
+    });
+    renderTable(filtered);
+  }
+
+  function deleteStudent(id, name) {
+    if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
+    fetch(`/api/students/${id}`, { method: 'DELETE' })
+      .then(r => r.json())
+      .then(() => loadStudents());
+  }
+
+  loadStudents();
+</script>
+</body>
+</html>

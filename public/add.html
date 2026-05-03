@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Student — PMAS-AAUR Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Rawalpindi, Pakistan &nbsp;|&nbsp; University Institute of Information Technology</span>
+  <div>
+    <a href="#">Help Desk</a>
+    <a href="#">Contact</a>
+    <a href="#">AAUR Website</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text">
+      <h1>PMAS Arid Agriculture University</h1>
+      <p>Student Management Portal — UIIT</p>
+    </div>
+  </a>
+  <nav class="main-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="students.html">👨‍🎓 Students</a>
+  <a href="teachers.html">👨‍🏫 Teachers</a>
+  <a href="manage-courses.html">📚 Courses</a>
+  <a href="attendance.html">📋 Attendance</a>
+  <a href="grades.html">📊 Grades</a>
+  <a href="notices.html">📢 Notices</a>
+</nav>
+  <div class="user-badge">
+    <div class="user-avatar">A</div>
+    <span class="user-name">Admin</span>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div style="background: var(--primary); padding: 28px 40px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <h2 id="pageTitle" style="color:white; font-size:22px; font-weight:700; font-family:'Outfit',sans-serif;">➕ Add New Student</h2>
+    <p style="color:rgba(255,255,255,0.6); font-size:13px; margin-top:4px;">Fill in the student details below</p>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="index.html">🏠 Home</a>
+    <span class="sep">›</span>
+    <a href="students.html">Students</a>
+    <span class="sep">›</span>
+    <span class="current" id="breadTitle">Add Student</span>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 2fr 1fr; gap:22px; align-items:start;">
+
+    <!-- FORM CARD -->
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header">
+        <div class="card-title"><span>📋</span> <span id="formHeading">Student Information</span></div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="name" placeholder="e.g. Muhammad Ali Hassan">
+        </div>
+        <div class="form-group">
+          <label>Roll Number *</label>
+          <input type="text" id="roll_no" placeholder="e.g. 22-CS-101">
+        </div>
+        <div class="form-group">
+          <label>Department</label>
+          <select id="department">
+            <option value="">— Select Department —</option>
+            <option value="Computer Science">Computer Science (CS)</option>
+            <option value="Software Engineering">Software Engineering (SE)</option>
+            <option value="Information Technology">Information Technology (IT)</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Physics">Physics</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Semester</label>
+          <select id="semester">
+            <option value="">— Select Semester —</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="e.g. ali.hassan@student.uaar.edu.pk">
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:22px; padding-top:20px; border-top:1px solid var(--border);">
+        <button class="btn btn-primary" onclick="submitForm()">💾 Save Student</button>
+        <a href="students.html" class="btn btn-outline">✕ Cancel</a>
+      </div>
+
+      <div id="msg"></div>
+    </div>
+
+    <!-- SIDE PANEL -->
+    <div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-header" style="margin-bottom:14px; padding-bottom:12px;">
+          <div class="card-title"><span>💡</span> Guidelines</div>
+        </div>
+        <div style="font-size:13px; color:var(--text-muted); line-height:2;">
+          <div>✅ Fields marked with <strong>*</strong> are required</div>
+          <div>✅ Roll number format: <strong>YY-DEPT-XXX</strong></div>
+          <div>✅ Use university email if available</div>
+          <div>✅ Select correct department and semester</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-header" style="margin-bottom:14px; padding-bottom:12px;">
+          <div class="card-title"><span>🔗</span> Quick Links</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <a href="students.html" class="btn btn-outline" style="justify-content:center;">👥 View All Students</a>
+          <a href="index.html" class="btn btn-outline" style="justify-content:center;">🏠 Go to Dashboard</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>🎓 PMAS Arid Agriculture University</h3>
+      <p>University Institute of Information Technology (UIIT), Rawalpindi. Empowering students through technology and innovation since 1994.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Portal</h4>
+      <a href="index.html">Home</a>
+      <a href="students.html">Students</a>
+      <a href="add.html">Add Student</a>
+      <a href="courses.html">Courses</a>
+      <a href="notices.html">Notices</a>
+    </div>
+    <div class="footer-col">
+      <h4>University</h4>
+      <a href="#">AAUR Website</a>
+      <a href="#">Academic Calendar</a>
+      <a href="#">Fee Structure</a>
+      <a href="#">Contact UIIT</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 PMAS Arid Agriculture University Rawalpindi. All rights reserved.</div>
+    <div>Developed by <span>CSC-251 Web Technologies</span> — Spring 2026</div>
+  </div>
+</footer>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const editId    = urlParams.get('id');
+
+  if (editId) {
+    document.getElementById('pageTitle').textContent    = '✏️ Edit Student';
+    document.getElementById('breadTitle').textContent   = 'Edit Student';
+    document.getElementById('formHeading').textContent  = 'Edit Student Information';
+
+    fetch(`/api/students/${editId}`)
+      .then(r => r.json())
+      .then(s => {
+        document.getElementById('name').value       = s.name;
+        document.getElementById('roll_no').value    = s.roll_no;
+        document.getElementById('department').value = s.department || '';
+        document.getElementById('semester').value   = s.semester   || '';
+        document.getElementById('email').value      = s.email      || '';
+      });
+  }
+
+  function submitForm() {
+    const msg = document.getElementById('msg');
+    const data = {
+      name:       document.getElementById('name').value.trim(),
+      roll_no:    document.getElementById('roll_no').value.trim(),
+      department: document.getElementById('department').value,
+      semester:   document.getElementById('semester').value,
+      email:      document.getElementById('email').value.trim()
+    };
+
+    if (!data.name || !data.roll_no) {
+      msg.innerHTML = '<div class="alert alert-error">⚠️ Full Name and Roll Number are required fields.</div>';
+      return;
+    }
+
+    const url    = editId ? `/api/students/${editId}` : '/api/students';
+    const method = editId ? 'PUT' : 'POST';
+
+    fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(r => r.json())
+    .then(res => {
+      msg.innerHTML = `<div class="alert alert-success">✅ ${res.message}</div>`;
+      if (!editId) {
+        ['name','roll_no','email'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('department').value = '';
+        document.getElementById('semester').value   = '';
+      } else {
+        setTimeout(() => window.location.href = 'students.html', 1200);
+      }
+    })
+    .catch(() => {
+      msg.innerHTML = '<div class="alert alert-error">❌ Something went wrong. Please check if server is running.</div>';
+    });
+  }
+</script>
+</body>
+</html>

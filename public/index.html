@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMAS-AAUR | Student Management Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Rawalpindi, Pakistan &nbsp;|&nbsp; University Institute of Information Technology</span>
+  <div>
+    <a href="#">Help Desk</a>
+    <a href="#">Contact</a>
+    <a href="#">AAUR Website</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text">
+      <h1>PMAS Arid Agriculture University</h1>
+      <p>Student Management Portal — UIIT</p>
+    </div>
+  </a>
+
+  <nav class="main-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="students.html">👨‍🎓 Students</a>
+  <a href="teachers.html">👨‍🏫 Teachers</a>
+  <a href="manage-courses.html">📚 Courses</a>
+  <a href="attendance.html">📋 Attendance</a>
+  <a href="grades.html">📊 Grades</a>
+  <a href="notices.html">📢 Notices</a>
+</nav>
+
+  <div class="user-badge">
+    <div class="user-avatar">A</div>
+    <span class="user-name">Admin</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero-banner">
+  <div class="hero-content">
+    <div class="hero-tag">🎓 Academic Year 2025–2026</div>
+    <h1>Student Management Portal</h1>
+    <p>University Institute of Information Technology — CS/SE Department</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <h3 id="total-students">...</h3>
+        <p>Registered Students</p>
+      </div>
+      <div class="hero-stat">
+        <h3>4th</h3>
+        <p>Current Semester</p>
+      </div>
+      <div class="hero-stat">
+        <h3>2026</h3>
+        <p>Spring Session</p>
+      </div>
+      <div class="hero-stat">
+        <h3>UIIT</h3>
+        <p>Department</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page-wrapper">
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue">👨‍🎓</div>
+      <div class="stat-info">
+        <h3 id="s-count">...</h3>
+        <p>Total Students</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">📚</div>
+      <div class="stat-info">
+        <h3>6</h3>
+        <p>Active Courses</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon orange">📢</div>
+      <div class="stat-info">
+        <h3>3</h3>
+        <p>New Notices</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red">📅</div>
+      <div class="stat-info">
+        <h3>Spring</h3>
+        <p>Current Session</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTICES + QUICK LINKS ROW -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:22px; margin-bottom:22px;">
+
+    <!-- NOTICES -->
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header">
+        <div class="card-title"><span>📢</span> Latest Notices</div>
+        <a href="notices.html" class="btn btn-outline btn-sm">View All</a>
+      </div>
+      <div class="notice-banner">
+        <span>📌</span>
+        <div><strong>Assignment 4 Due:</strong> Full-Stack Web Development project submission deadline is 17th April 2026.</div>
+      </div>
+      <div class="notice-banner">
+        <span>📌</span>
+        <div><strong>Mid-Term Schedule:</strong> Mid-term examinations will commence from 5th May 2026.</div>
+      </div>
+      <div class="notice-banner">
+        <span>📌</span>
+        <div><strong>Fee Submission:</strong> Last date for semester fee submission is 30th April 2026.</div>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header">
+        <div class="card-title"><span>⚡</span> Quick Actions</div>
+      </div>
+      <div class="quick-links">
+        <a href="add.html" class="quick-link">
+          <div class="ql-icon">➕</div>
+          Add Student
+        </a>
+        <a href="students.html" class="quick-link">
+          <div class="ql-icon">👥</div>
+          View Students
+        </a>
+        <a href="courses.html" class="quick-link">
+          <div class="ql-icon">📚</div>
+          Courses
+        </a>
+        <a href="notices.html" class="quick-link">
+          <div class="ql-icon">📢</div>
+          Notices
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RECENT STUDENTS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>👨‍🎓</span> Recently Added Students</div>
+      <a href="students.html" class="btn btn-primary btn-sm">View All Students</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Roll No</th>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="recent-tbody">
+          <tr><td colspan="5" style="text-align:center; padding:30px; color:#999">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>🎓 PMAS Arid Agriculture University</h3>
+      <p>University Institute of Information Technology (UIIT), Rawalpindi. Empowering students through technology and innovation since 1994.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Portal</h4>
+      <a href="index.html">Home</a>
+      <a href="students.html">Students</a>
+      <a href="add.html">Add Student</a>
+      <a href="courses.html">Courses</a>
+      <a href="notices.html">Notices</a>
+    </div>
+    <div class="footer-col">
+      <h4>University</h4>
+      <a href="#">AAUR Website</a>
+      <a href="#">Academic Calendar</a>
+      <a href="#">Fee Structure</a>
+      <a href="#">Contact UIIT</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 PMAS Arid Agriculture University Rawalpindi. All rights reserved.</div>
+    <div>Developed by <span>CSC-251 Web Technologies</span> — Spring 2026</div>
+  </div>
+</footer>
+
+<script>
+  fetch('/api/students')
+    .then(r => r.json())
+    .then(students => {
+      document.getElementById('total-students').textContent = students.length;
+      document.getElementById('s-count').textContent = students.length;
+
+      const recent = students.slice(0, 5);
+      const tbody = document.getElementById('recent-tbody');
+
+      if (recent.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="empty-state" style="padding:40px; text-align:center; color:#999">
+          No students yet. <a href="add.html" style="color:var(--primary-light)">Add one!</a></td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = recent.map(s => `
+        <tr>
+          <td>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="s-avatar">${s.name.charAt(0).toUpperCase()}</div>
+              <div>
+                <div class="student-name">${s.name}</div>
+                <div class="student-roll">${s.email || 'No email'}</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="badge badge-blue">${s.roll_no}</span></td>
+          <td>${s.department || '<span style="color:#aaa">—</span>'}</td>
+          <td>${s.semester ? `<span class="badge badge-green">Sem ${s.semester}</span>` : '<span style="color:#aaa">—</span>'}</td>
+          <td><a href="add.html?id=${s.id}" class="btn btn-outline btn-sm">✏️ Edit</a></td>
+        </tr>
+      `).join('');
+    })
+    .catch(() => {
+      document.getElementById('total-students').textContent = '0';
+      document.getElementById('s-count').textContent = '0';
+    });
+</script>
+</body>
+</html>

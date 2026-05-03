@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teachers — PMAS-AAUR Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <span>📍 Rawalpindi, Pakistan &nbsp;|&nbsp; University Institute of Information Technology</span>
+  <div><a href="#">Help Desk</a><a href="#">Contact</a><a href="#">AAUR Website</a></div>
+</div>
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text"><h1>PMAS Arid Agriculture University</h1><p>Student Management Portal — UIIT</p></div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="students.html">👨‍🎓 Students</a>
+    <a href="teachers.html" class="active">👨‍🏫 Teachers</a>
+    <a href="manage-courses.html">📚 Courses</a>
+    <a href="attendance.html">📋 Attendance</a>
+    <a href="grades.html">📊 Grades</a>
+    <a href="notices.html">📢 Notices</a>
+  </nav>
+  <div class="user-badge"><div class="user-avatar">A</div><span class="user-name">Admin</span></div>
+</header>
+
+<div style="background:var(--primary);padding:28px 40px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h2 style="color:white;font-size:22px;font-weight:700;font-family:'Outfit',sans-serif;">👨‍🏫 Faculty Management</h2>
+    <p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:4px;">Add and manage university teachers and faculty members</p>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <div class="breadcrumb">
+    <a href="index.html">🏠 Home</a><span class="sep">›</span><span class="current">Teachers</span>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon blue">👨‍🏫</div><div class="stat-info"><h3 id="total-t">...</h3><p>Total Faculty</p></div></div>
+    <div class="stat-card"><div class="stat-icon green">🖥️</div><div class="stat-info"><h3 id="cs-t">...</h3><p>CS Department</p></div></div>
+    <div class="stat-card"><div class="stat-icon orange">⚙️</div><div class="stat-info"><h3 id="se-t">...</h3><p>SE Department</p></div></div>
+    <div class="stat-card"><div class="stat-icon red">🏛️</div><div class="stat-info"><h3 id="other-t">...</h3><p>Other Dept.</p></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>➕</span> <span id="formTitle">Add New Teacher</span></div>
+      <button class="btn btn-outline btn-sm" onclick="resetForm()">✕ Clear</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group"><label>Full Name *</label><input type="text" id="name" placeholder="e.g. Dr. Muhammad Habib"></div>
+      <div class="form-group"><label>Employee ID *</label><input type="text" id="employee_id" placeholder="e.g. EMP-001"></div>
+      <div class="form-group">
+        <label>Department</label>
+        <select id="department">
+          <option value="">— Select —</option>
+          <option value="Computer Science">Computer Science (CS)</option>
+          <option value="Software Engineering">Software Engineering (SE)</option>
+          <option value="Information Technology">IT</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Physics">Physics</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Designation</label>
+        <select id="designation">
+          <option value="">— Select —</option>
+          <option value="Professor">Professor</option>
+          <option value="Associate Professor">Associate Professor</option>
+          <option value="Assistant Professor">Assistant Professor</option>
+          <option value="Lecturer">Lecturer</option>
+          <option value="Lab Engineer">Lab Engineer</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="e.g. habib@uaar.edu.pk"></div>
+      <div class="form-group"><label>Phone</label><input type="text" id="phone" placeholder="e.g. 051-9290573"></div>
+    </div>
+    <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);display:flex;gap:10px;">
+      <button class="btn btn-primary" onclick="submitTeacher()">💾 Save Teacher</button>
+      <button class="btn btn-outline" onclick="resetForm()">✕ Cancel</button>
+    </div>
+    <div id="msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>📋</span> All Faculty Members</div>
+      <div class="search-wrap"><span>🔍</span><input type="text" id="search" placeholder="Search..." oninput="filterTeachers()"></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Teacher</th><th>Employee ID</th><th>Department</th><th>Designation</th><th>Phone</th><th>Actions</th></tr></thead>
+        <tbody id="tbody"><tr><td colspan="7" style="text-align:center;padding:40px;color:#999">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><h3>🎓 PMAS Arid Agriculture University</h3><p>University Institute of Information Technology (UIIT), Rawalpindi. Empowering students through technology and innovation since 1994.</p></div>
+    <div class="footer-col"><h4>Portal</h4><a href="index.html">Home</a><a href="students.html">Students</a><a href="teachers.html">Teachers</a><a href="manage-courses.html">Courses</a><a href="attendance.html">Attendance</a><a href="grades.html">Grades</a></div>
+    <div class="footer-col"><h4>University</h4><a href="#">AAUR Website</a><a href="#">Academic Calendar</a><a href="#">Fee Structure</a><a href="#">Contact UIIT</a></div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 PMAS Arid Agriculture University Rawalpindi. All rights reserved.</div>
+    <div>Developed by <span>CSC-251 Web Technologies</span> — Spring 2026</div>
+  </div>
+</footer>
+
+<script>
+  let allTeachers = [], editId = null;
+
+  function loadTeachers() {
+    fetch('/api/teachers').then(r=>r.json()).then(data=>{
+      allTeachers = data;
+      document.getElementById('total-t').textContent = data.length;
+      document.getElementById('cs-t').textContent = data.filter(t=>t.department&&t.department.includes('Computer')).length;
+      document.getElementById('se-t').textContent = data.filter(t=>t.department&&t.department.includes('Software')).length;
+      document.getElementById('other-t').textContent = data.filter(t=>!t.department||(!t.department.includes('Computer')&&!t.department.includes('Software'))).length;
+      renderTable(data);
+    });
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('tbody');
+    if (!data.length) { tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state"><div class="icon">👨‍🏫</div><h3>No teachers found</h3><p>Add a faculty member using the form above.</p></div></td></tr>`; return; }
+    tbody.innerHTML = data.map((t,i)=>`
+      <tr>
+        <td style="color:var(--text-muted);font-size:13px">${i+1}</td>
+        <td><div style="display:flex;align-items:center;gap:10px;"><div class="s-avatar" style="background:linear-gradient(135deg,#27AE60,#1e8449)">${t.name.charAt(0)}</div><div><div class="student-name">${t.name}</div><div class="student-roll">${t.email||'—'}</div></div></div></td>
+        <td><span class="badge badge-blue">${t.employee_id}</span></td>
+        <td>${t.department||'<span style="color:#bbb">—</span>'}</td>
+        <td>${t.designation?`<span class="badge badge-orange">${t.designation}</span>`:'<span style="color:#bbb">—</span>'}</td>
+        <td style="font-size:13px;color:var(--text-muted)">${t.phone||'—'}</td>
+        <td><div style="display:flex;gap:6px;"><button class="btn btn-outline btn-sm" onclick="editTeacher(${t.id})">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteTeacher(${t.id},'${t.name.replace(/'/g,"\\'")}')">🗑️</button></div></td>
+      </tr>`).join('');
+  }
+
+  function filterTeachers() { const q=document.getElementById('search').value.toLowerCase(); renderTable(allTeachers.filter(t=>!q||t.name.toLowerCase().includes(q)||t.employee_id.toLowerCase().includes(q))); }
+
+  function editTeacher(id) {
+    fetch(`/api/teachers/${id}`).then(r=>r.json()).then(t=>{
+      editId=id;
+      document.getElementById('name').value=t.name;
+      document.getElementById('employee_id').value=t.employee_id;
+      document.getElementById('department').value=t.department||'';
+      document.getElementById('designation').value=t.designation||'';
+      document.getElementById('email').value=t.email||'';
+      document.getElementById('phone').value=t.phone||'';
+      document.getElementById('formTitle').textContent='Edit Teacher';
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
+
+  function submitTeacher() {
+    const msg=document.getElementById('msg');
+    const data={name:document.getElementById('name').value.trim(),employee_id:document.getElementById('employee_id').value.trim(),department:document.getElementById('department').value,designation:document.getElementById('designation').value,email:document.getElementById('email').value.trim(),phone:document.getElementById('phone').value.trim()};
+    if (!data.name||!data.employee_id){msg.innerHTML='<div class="alert alert-error">⚠️ Name and Employee ID are required.</div>';return;}
+    const url=editId?`/api/teachers/${editId}`:'/api/teachers', method=editId?'PUT':'POST';
+    fetch(url,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json()).then(res=>{msg.innerHTML=`<div class="alert alert-success">✅ ${res.message}</div>`;resetForm();loadTeachers();});
+  }
+
+  function deleteTeacher(id,name){if(!confirm(`Delete "${name}"?`))return;fetch(`/api/teachers/${id}`,{method:'DELETE'}).then(()=>loadTeachers());}
+
+  function resetForm(){editId=null;['name','employee_id','email','phone'].forEach(id=>document.getElementById(id).value='');document.getElementById('department').value='';document.getElementById('designation').value='';document.getElementById('formTitle').textContent='Add New Teacher';document.getElementById('msg').innerHTML='';}
+
+  loadTeachers();
+</script>
+</body>
+</html>

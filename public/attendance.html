@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance — PMAS-AAUR Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <span>📍 Rawalpindi, Pakistan &nbsp;|&nbsp; University Institute of Information Technology</span>
+  <div><a href="#">Help Desk</a><a href="#">Contact</a><a href="#">AAUR Website</a></div>
+</div>
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text"><h1>PMAS Arid Agriculture University</h1><p>Student Management Portal — UIIT</p></div>
+  </a>
+  <nav class="main-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="students.html">👨‍🎓 Students</a>
+    <a href="teachers.html">👨‍🏫 Teachers</a>
+    <a href="manage-courses.html">📚 Courses</a>
+    <a href="attendance.html" class="active">📋 Attendance</a>
+    <a href="grades.html">📊 Grades</a>
+    <a href="notices.html">📢 Notices</a>
+  </nav>
+  <div class="user-badge"><div class="user-avatar">A</div><span class="user-name">Admin</span></div>
+</header>
+
+<div style="background:var(--primary);padding:28px 40px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h2 style="color:white;font-size:22px;font-weight:700;font-family:'Outfit',sans-serif;">📋 Attendance Management</h2>
+    <p style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:4px;">Mark and track student attendance records</p>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <div class="breadcrumb">
+    <a href="index.html">🏠 Home</a><span class="sep">›</span><span class="current">Attendance</span>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-info"><h3 id="total-a">...</h3><p>Total Records</p></div></div>
+    <div class="stat-card"><div class="stat-icon green">✅</div><div class="stat-info"><h3 id="present-a">...</h3><p>Present</p></div></div>
+    <div class="stat-card"><div class="stat-icon red">❌</div><div class="stat-info"><h3 id="absent-a">...</h3><p>Absent</p></div></div>
+    <div class="stat-card"><div class="stat-icon orange">⏰</div><div class="stat-info"><h3 id="late-a">...</h3><p>Late</p></div></div>
+  </div>
+
+  <!-- MARK ATTENDANCE FORM -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>✏️</span> Mark Attendance</div>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Student *</label>
+        <select id="student_id"><option value="">— Select Student —</option></select>
+      </div>
+      <div class="form-group">
+        <label>Course *</label>
+        <select id="course_id"><option value="">— Select Course —</option></select>
+      </div>
+      <div class="form-group">
+        <label>Date *</label>
+        <input type="date" id="date">
+      </div>
+      <div class="form-group">
+        <label>Status *</label>
+        <select id="status">
+          <option value="Present">✅ Present</option>
+          <option value="Absent">❌ Absent</option>
+          <option value="Late">⏰ Late</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);display:flex;gap:10px;">
+      <button class="btn btn-primary" onclick="submitAttendance()">💾 Mark Attendance</button>
+    </div>
+    <div id="msg"></div>
+  </div>
+
+  <!-- RECORDS TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><span>📊</span> Attendance Records</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <select id="filterStatus" onchange="filterRecords()" style="width:auto;padding:7px 12px;font-size:13px;">
+          <option value="">All Status</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+        </select>
+        <div class="search-wrap"><span>🔍</span><input type="text" id="search" placeholder="Search student..." oninput="filterRecords()"></div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Student</th><th>Course</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="tbody"><tr><td colspan="6" style="text-align:center;padding:40px;color:#999">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><h3>🎓 PMAS Arid Agriculture University</h3><p>University Institute of Information Technology (UIIT), Rawalpindi.</p></div>
+    <div class="footer-col"><h4>Portal</h4><a href="index.html">Home</a><a href="students.html">Students</a><a href="teachers.html">Teachers</a><a href="manage-courses.html">Courses</a><a href="attendance.html">Attendance</a><a href="grades.html">Grades</a></div>
+    <div class="footer-col"><h4>University</h4><a href="#">AAUR Website</a><a href="#">Academic Calendar</a><a href="#">Fee Structure</a><a href="#">Contact UIIT</a></div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 PMAS Arid Agriculture University Rawalpindi. All rights reserved.</div>
+    <div>Developed by <span>CSC-251 Web Technologies</span> — Spring 2026</div>
+  </div>
+</footer>
+
+<script>
+  let allRecords = [];
+
+  // Set today's date
+  document.getElementById('date').valueAsDate = new Date();
+
+  function loadDropdowns() {
+    fetch('/api/students').then(r=>r.json()).then(students=>{
+      document.getElementById('student_id').innerHTML='<option value="">— Select Student —</option>'+students.map(s=>`<option value="${s.id}">${s.name} (${s.roll_no})</option>`).join('');
+    });
+    fetch('/api/courses').then(r=>r.json()).then(courses=>{
+      document.getElementById('course_id').innerHTML='<option value="">— Select Course —</option>'+courses.map(c=>`<option value="${c.id}">${c.course_code} — ${c.course_name}</option>`).join('');
+    });
+  }
+
+  function loadAttendance() {
+    fetch('/api/attendance').then(r=>r.json()).then(data=>{
+      allRecords=data;
+      document.getElementById('total-a').textContent=data.length;
+      document.getElementById('present-a').textContent=data.filter(a=>a.status==='Present').length;
+      document.getElementById('absent-a').textContent=data.filter(a=>a.status==='Absent').length;
+      document.getElementById('late-a').textContent=data.filter(a=>a.status==='Late').length;
+      renderTable(data);
+    });
+  }
+
+  function renderTable(data) {
+    const tbody=document.getElementById('tbody');
+    if(!data.length){tbody.innerHTML=`<tr><td colspan="6"><div class="empty-state"><div class="icon">📋</div><h3>No records found</h3><p>Mark attendance using the form above.</p></div></td></tr>`;return;}
+    tbody.innerHTML=data.map((a,i)=>{
+      const statusBadge = a.status==='Present'?'badge-green':a.status==='Absent'?'badge-red':'badge-orange';
+      const dateStr = new Date(a.date).toLocaleDateString('en-PK',{day:'2-digit',month:'short',year:'numeric'});
+      return `<tr>
+        <td style="color:var(--text-muted);font-size:13px">${i+1}</td>
+        <td><div style="display:flex;align-items:center;gap:10px;"><div class="s-avatar">${a.student_name.charAt(0)}</div><div><div class="student-name">${a.student_name}</div><div class="student-roll">${a.roll_no}</div></div></div></td>
+        <td><span class="badge badge-blue">${a.course_code}</span><span style="font-size:12px;color:var(--text-muted);margin-left:6px;">${a.course_name}</span></td>
+        <td style="font-size:13px">${dateStr}</td>
+        <td><span class="badge ${statusBadge}">${a.status}</span></td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteRecord(${a.id})">🗑️</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  function filterRecords(){
+    const q=document.getElementById('search').value.toLowerCase();
+    const s=document.getElementById('filterStatus').value;
+    renderTable(allRecords.filter(a=>(!q||a.student_name.toLowerCase().includes(q))&&(!s||a.status===s)));
+  }
+
+  function submitAttendance(){
+    const msg=document.getElementById('msg');
+    const data={student_id:document.getElementById('student_id').value,course_id:document.getElementById('course_id').value,date:document.getElementById('date').value,status:document.getElementById('status').value};
+    if(!data.student_id||!data.course_id||!data.date){msg.innerHTML='<div class="alert alert-error">⚠️ Student, course and date are required.</div>';return;}
+    fetch('/api/attendance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json()).then(res=>{msg.innerHTML=`<div class="alert alert-success">✅ ${res.message}</div>`;loadAttendance();});
+  }
+
+  function deleteRecord(id){if(!confirm('Delete this record?'))return;fetch(`/api/attendance/${id}`,{method:'DELETE'}).then(()=>loadAttendance());}
+
+  loadDropdowns();
+  loadAttendance();
+</script>
+</body>
+</html>
